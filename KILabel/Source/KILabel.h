@@ -46,6 +46,11 @@ typedef NS_ENUM(NSUInteger, KILinkType)
      *  URLs, http etc
      */
     KILinkTypeURL,
+    
+    /**
+     * No links
+     */
+    KILinkTypeGeneric,
 };
 
 /**
@@ -89,7 +94,7 @@ typedef NS_OPTIONS(NSUInteger, KILinkTypeOption)
  *  @param string Content of the link that was tapped, includes @ or # tokens
  *  @param range  The range of the string within the label's text
  */
-typedef void (^KILinkTapHandler)(KILabel *label, NSString *string, NSRange range);
+typedef void (^KILinkTapHandler)(KILabel *label,  NSString * _Nullable string, NSRange range);
 
 extern NSString * const KILabelLinkTypeKey;
 extern NSString * const KILabelRangeKey;
@@ -175,6 +180,11 @@ IB_DESIGNABLE
  * Callback block for KILinkTypeURL link tap.
  */
 @property (nullable, nonatomic, copy) KILinkTapHandler urlLinkTapHandler;
+
+/**
+ * Callback block for KILinkTypeGeneric link tap.
+ */
+@property (nullable, nonatomic, copy) KILinkTapHandler genericLinkTapHandler;
 
 /** ****************************************************************************************** **
  * @name Geometry

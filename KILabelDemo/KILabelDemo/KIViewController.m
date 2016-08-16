@@ -76,6 +76,16 @@
         // Open URLs
         [self attemptOpenURL:[NSURL URLWithString:string]];
     };
+    
+    _label.genericLinkTapHandler = ^(KILabel *label, NSString *string, NSRange range) {
+        NSString *message = @"You tapped no link type";
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"No Link"
+                                                                       message:message
+                                                                preferredStyle:UIAlertControllerStyleAlert];
+        [alert addAction:[UIAlertAction actionWithTitle:@"Dismiss" style:UIAlertActionStyleDefault handler:nil]];
+        
+        [self presentViewController:alert animated:YES completion:nil];
+    };
 }
 
 #pragma mark - Action Targets

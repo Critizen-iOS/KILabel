@@ -683,7 +683,7 @@ NSString * const KILabelLinkKey = @"link";
     }
     else
     {
-        [super touchesBegan:touches withEvent:event];
+        [self receivedActionForLinkType:KILinkTypeGeneric string:nil range:NSMakeRange(0, 0)];
     }
     
     self.selectedRange = NSMakeRange(0, 0);
@@ -697,30 +697,36 @@ NSString * const KILabelLinkKey = @"link";
     self.selectedRange = NSMakeRange(0, 0);
 }
 
-- (void)receivedActionForLinkType:(KILinkType)linkType string:(NSString*)string range:(NSRange)range
+- (void)receivedActionForLinkType:(KILinkType)linkType string:(nullable NSString*)string range:(NSRange)range
 {
     switch (linkType)
     {
-    case KILinkTypeUserHandle:
-        if (_userHandleLinkTapHandler)
-        {
-            _userHandleLinkTapHandler(self, string, range);
-        }
-        break;
-        
-    case KILinkTypeHashtag:
-        if (_hashtagLinkTapHandler)
-        {
-            _hashtagLinkTapHandler(self, string, range);
-        }
-        break;
-        
-    case KILinkTypeURL:
-        if (_urlLinkTapHandler)
-        {
-            _urlLinkTapHandler(self, string, range);
-        }
-        break;
+        case KILinkTypeUserHandle:
+            if (_userHandleLinkTapHandler)
+            {
+                _userHandleLinkTapHandler(self, string, range);
+            }
+            break;
+            
+        case KILinkTypeHashtag:
+            if (_hashtagLinkTapHandler)
+            {
+                _hashtagLinkTapHandler(self, string, range);
+            }
+            break;
+            
+        case KILinkTypeURL:
+            if (_urlLinkTapHandler)
+            {
+                _urlLinkTapHandler(self, string, range);
+            }
+            break;
+        case KILinkTypeGeneric:
+            if (_genericLinkTapHandler)
+            {
+                _genericLinkTapHandler(self, string, range);
+            }
+            break;
     }
 }
 
